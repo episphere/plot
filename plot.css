@@ -17,12 +17,14 @@ h2 {
 h3 {
     color:#5e0096;
 }
+
 h4 {
     color:#00968a;
     font-size:large;
 }
+
 code {
-    color:green;
+    color:maroon;
     font-style:italic;
 }
 
@@ -32,10 +34,10 @@ a:hover {
 }
 
 .code {
-    color:blue;
+    color:maroon;
     font-family:monospace;
     vertical-align:top
-}
+};
 .label {
     color:blue
-}
+};
