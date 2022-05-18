@@ -39,6 +39,7 @@ loadFile.onchange=evt=>{
     fr.readAsText(loadFile.files[0]); 
 }
 buttonURL.onclick=function(){
+	plotDiv.innerHTML='plotting ...'
 	if(importURL.value.length>3&location.search.slice(1)!=importURL.value){
 		location.search=importURL.value
 	}else{
@@ -47,7 +48,7 @@ buttonURL.onclick=function(){
 	
 }
 if(location.search.length>3){
-	//location.search=decodeURIComponent(location.search.slice(1))
+	plotDiv.innerHTML='plotting ...'
 	if(location.search.slice(1)!=importURL.value){
 		importURL.value=decodeURIComponent(location.search.slice(1))
 	}
