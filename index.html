@@ -17,7 +17,7 @@ Plotting library, mostly an add on to <a href="https://plotly.com/javascript" ta
 <pre id="code1">
 </pre>
 <p>Get graph data, for example, exported as json from <a href="https://episphere.github.io/mortalitytracker" target="_blank">mortality tracker</a>:</p>
-<li>Import json from URL <input id="importURL" size=30><button onclick="plot.draw(importURL.value,importURL.value.match(/([^\.\/]+)\.[^\.]+/)[1]+'.csv')">import</button></li>
+<li>Import json from URL <input id="importURL" size=30><button  id="buttonURL">import</button></li>
 <li>Load json from file <input type='file' id="loadFile"></li>
 <hr>
 <div id="plotDiv"></div>
@@ -37,6 +37,18 @@ loadFile.onchange=evt=>{
         //debugger
     } 
     fr.readAsText(loadFile.files[0]); 
+}
+buttonURL.onclick=function(){
+	if(importURL.value.length>3&location.search.slice(1)!=importURL.value){
+		location.search=importURL.value
+	}
+	plot.draw(importURL.value,importURL.value.match(/([^\.\/]+)\.[^\.]+$/)[1]+'.csv')
+}
+if(location.search.length>3){
+	if(location.search.slice(1)!=importURL.value){
+		importURL.value=location.search.slice(1)
+	}
+	plot.draw(importURL.value,importURL.value.match(/([^\.\/]+)\.[^\.]+$/)[1]+'.csv')
 }
 
 </script>
