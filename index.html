@@ -41,12 +41,15 @@ loadFile.onchange=evt=>{
 buttonURL.onclick=function(){
 	if(importURL.value.length>3&location.search.slice(1)!=importURL.value){
 		location.search=importURL.value
+	}else{
+		plot.draw(importURL.value,importURL.value.match(/([^\.\/]+)\.[^\.]+$/)[1]+'.csv')
 	}
-	plot.draw(importURL.value,importURL.value.match(/([^\.\/]+)\.[^\.]+$/)[1]+'.csv')
+	
 }
 if(location.search.length>3){
+	//location.search=decodeURIComponent(location.search.slice(1))
 	if(location.search.slice(1)!=importURL.value){
-		importURL.value=location.search.slice(1)
+		importURL.value=decodeURIComponent(location.search.slice(1))
 	}
 	plot.draw(importURL.value,importURL.value.match(/([^\.\/]+)\.[^\.]+$/)[1]+'.csv')
 }
