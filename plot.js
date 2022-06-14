@@ -33,6 +33,7 @@ plot.draw=async(obj,fname,div='plotDiv')=>{
     div.appendChild(divTools)
     //debugger
     divTools.innerHTML=`<a href="#" onclick="plot.extractTraces(plot.data.obj.traces,'${fname}')">${fname}</a>`
+	divTools.innerHTML+=`<br><a href="#" onclick="plot.extractTracesDetailed(plot.data.obj,'detailed_${fname}')">detailed_${fname}</a>`
     //debugger
 }
 plot.extractTraces=(traces,fname)=>{
@@ -70,6 +71,46 @@ plot.extractTraces=(traces,fname)=>{
         }
         csv += '\n'
     }
+    plot.saveFile(csv,fname)
+    //debugger
+}
+
+plot.extractTracesDetailed=(obj,fname)=>{ // separating individual traces while having access to all details in obj
+    let csv=''
+	// table headers
+	let n = obj.traces.length
+	let m = Math.max(...obj.traces.map(t=>t.x.length)) // max length of traces
+	obj.traces.forEach((tt,i)=>{
+		csv+=obj.layout.xaxis.title.text
+		csv+=','
+		csv+=tt.name
+		if(i<(n-1)){
+			csv+=','
+		}else{
+			csv+='\n'
+		}
+		//debugger
+	})
+	console.log(csv)
+	// table rows
+	function defined(x){
+		if(typeof(x)=='undefined'){
+			return ''
+		}else{
+			return x
+		}
+	}
+	for(var j=0;j<m;j++){
+		obj.traces.forEach((tt,i)=>{
+			csv+=`${defined(tt.x[j])},${defined(tt.y[j])}` 
+			//debugger
+			if(i<(n-1)){
+				csv+=','
+			}else{
+				csv+='\n'
+			}
+		})
+	}
     plot.saveFile(csv,fname)
     //debugger
 }
