@@ -33,7 +33,8 @@ plot.draw=async(obj,fname,div='plotDiv')=>{
     div.appendChild(divTools)
     //debugger
     divTools.innerHTML=`<a href="#" onclick="plot.extractTraces(plot.data.obj.traces,'${fname}')">${fname}</a>`
-	divTools.innerHTML+=`<br><a href="#" onclick="plot.extractTracesDetailed(plot.data.obj,'detailed_${fname}')">detailed_${fname}</a>`
+	divTools.innerHTML+=`<br><a href="#" onclick="plot.extractTracesDetailed(plot.data.obj,'traces_${fname}')">traces_${fname}</a>`
+	divTools.innerHTML+=`<br><a href="#" onclick="plot.saveFile(JSON.stringify(plot.data.obj),'${fname.slice(0,-4)}.json')">${fname.slice(0,-4)}.json (source data)</a>`
     //debugger
 }
 plot.extractTraces=(traces,fname)=>{
